@@ -3,7 +3,6 @@
   background-color: white;
   display: flex;
   flex-direction: row;
-  box-shadow: 0 0.5rem 1rem lightgray;
   margin-bottom: 0.5rem;
 }
 
@@ -12,11 +11,18 @@
   flex-direction: column;
   padding: 0.5rem;
   align-items: flex-start;
+  flex-grow: 1;
 }
 
 .title {
   color: black
 }
+
+.channel {
+  color: black;
+  margin-top: 0.5rem;
+}
+
 .btnDownload{
   background: black;
   color: white;
@@ -25,8 +31,6 @@
   font-weight: bold;
   font-size: 16px; 
   padding: 0.5rem 1rem 0.5rem 1rem; 
-  border-radius: 50px;
-  margin-top: 0.5rem;
 }
 
 .btnDownload:hover {

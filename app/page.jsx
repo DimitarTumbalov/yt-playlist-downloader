@@ -4,14 +4,14 @@ import { YOUTUBE_PLAYLIST_REGEX } from '../Constants';
 
 import styles from './page.module.css'
 import { useEffect, useState } from 'react';
-import Playlist from '../components/Playlist';
+import Playlist from '../components/Playlist/Playlist';
 
-import iconDownload from '../public/icon_download.svg'
-import Image from 'next/image';
 import { extractPlaylistItems } from './../services/YouTubeDataAPI';
+import NavBar from '../components/NavBar/NavBar';
+import SearchInput from './../components/SearchInput/SearchInput';
 
 export default function Home() {
-	const [inputValue, setInputValue] = useState('');
+	const [inputValue, setInputValue] = useState('https://www.youtube.com/watch?v=XXYlFuWEuKI&list=RDQMgEzdN5RuCXE&start_radio=1');
 	const [playlistId, setPlaylistId] = useState(null);
 	const [playlistItems, setPlaylistItems] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -31,9 +31,11 @@ export default function Home() {
 			setPlaylistItems(res.data.items.map(i => ({
 				title: i.snippet.title,
 				videoId: i.contentDetails.videoId,
-				thumbnailUrl: i.snippet.thumbnails.medium.url
+				thumbnailUrl: i.snippet.thumbnails.medium.url,
+				channelId: i.snippet.videoOwnerChannelId,
+				channelTitle: i.snippet.videoOwnerChannelTitle
 			})))
-		}).catch(err => console.log(err.message))
+		}).catch(() => setPlaylistItems(null))
 
 		setLoading(false);
 	} 
@@ -48,19 +50,9 @@ export default function Home() {
 
 	return (
 		<main className={styles.main}>
-			<nav>
-				<Image className={styles.logoImg} src={iconDownload} alt='logo'/>
-				<h1 className={styles.logoText}>YouTube Playlist Downloader</h1>
-			</nav>
-			<input className={styles.input} onChange={(e) => setInputValue(e.target.value)} value={inputValue}/>
-			<button 
-				className={styles.btn} 
-				onClick={() => extractPlayListId()}
-				disabled={inputValue.length == 0}>
-				Retrieve Playlist videos
-			</button>
-			{loading && <div className={styles.loader} />}
-			<Playlist items={playlistItems}/>
+			<NavBar />
+			<SearchInput value={inputValue} setValue={setInputValue} onClick={extractPlayListId}/>
+			<Playlist items={playlistItems} loading={loading}/>
 		</main>
 	)
 }
