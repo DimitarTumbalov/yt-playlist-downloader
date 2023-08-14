@@ -1,50 +1,66 @@
 'use client';
 
-import axios from 'axios';
-import { YOUTUBE_API_URL, YT_PLAYLIST_REGEX } from '../Constants';
+import { YOUTUBE_PLAYLIST_REGEX } from '../Constants';
 
 import styles from './page.module.css'
 import { useEffect, useState } from 'react';
-import PlaylistItem from '../components/PlaylistItem';
+import Playlist from '../components/Playlist';
+
+import iconDownload from '../public/icon_download.svg'
+import Image from 'next/image';
+import { extractPlaylistItems } from './../services/YouTubeDataAPI';
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('');
-  const [playlistId, setPlaylistId] = useState(null);
-  const [playlistItems, setPlaylistItems] = useState([]);
+	const [inputValue, setInputValue] = useState('');
+	const [playlistId, setPlaylistId] = useState(null);
+	const [playlistItems, setPlaylistItems] = useState([]);
+	const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if(!playlistId) return;
+	useEffect(() => {
+		if(!playlistId) return;
 
-    getPlaylistItems();
-  }, [playlistId])
+		getPlaylistItems();
+	}, [playlistId])
 
-  const getPlaylistItems = async() => {
-    if(!playlistId) return;
+	const getPlaylistItems = async() => {
+		if(!playlistId) return;
 
-    await axios(`${YOUTUBE_API_URL}&playlistId=${playlistId}`).then(res => {
-      setPlaylistItems(res.data.items.map(i => ({
-        title: i.snippet.title,
-        videoId: i.contentDetails.videoId,
-        thumbnailUrl: i.snippet.thumbnails.default.url
-      })))
-    }).catch(err => console.log(err.message))
-  } 
+		setLoading(true);
 
-  const extractPlayListId = () => {
-    const match =  YT_PLAYLIST_REGEX.exec(inputValue)
+		await extractPlaylistItems(playlistId).then(res => {
+			setPlaylistItems(res.data.items.map(i => ({
+				title: i.snippet.title,
+				videoId: i.contentDetails.videoId,
+				thumbnailUrl: i.snippet.thumbnails.medium.url
+			})))
+		}).catch(err => console.log(err.message))
 
-    if(match?.length > 1){
-      setPlaylistId(match[1]);
-    }
-  }
+		setLoading(false);
+	} 
 
-  return (
-    <main className={styles.main}>
-      <input className={styles.input} onChange={(e) => setInputValue(e.target.value)} value={inputValue}/>
-      <button className={styles.btn} onClick={() => extractPlayListId()}>Retrieve Playlist videos</button>
-      {
-        playlistItems.map(item => <PlaylistItem key={item.videoId} item={item}/>)
-      }
-    </main>
-  )
+	const extractPlayListId = () => {
+		const match =  YOUTUBE_PLAYLIST_REGEX.exec(inputValue)
+
+		if(match?.length > 1){
+			setPlaylistId(match[1]);
+		}
+	}
+
+	return (
+		<main className={styles.main}>
+			<nav>
+				<Image className={styles.logoImg} src={iconDownload} alt='logo'/>
+				<h1 className={styles.logoText}>YouTube Playlist Downloader</h1>
+			</nav>
+			<input className={styles.input} onChange={(e) => setInputValue(e.target.value)} value={inputValue}/>
+			<button 
+				className={styles.btn} 
+				onClick={() => extractPlayListId()}
+				disabled={inputValue.length == 0}>
+				Retrieve Playlist videos
+			</button>
+			{loading && <div className={styles.loader} />}
+			<Playlist items={playlistItems}/>
+		</main>
+	)
 }

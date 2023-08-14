@@ -3,13 +3,32 @@
   background-color: white;
   display: flex;
   flex-direction: row;
-  margin-top: 1rem;
+  box-shadow: 0 0.5rem 1rem lightgray;
+  margin-bottom: 0.5rem;
 }
 
-.img {
-
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  align-items: flex-start;
 }
 
 .title {
   color: black
+}
+.btnDownload{
+  background: black;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px; 
+  padding: 0.5rem 1rem 0.5rem 1rem; 
+  border-radius: 50px;
+  margin-top: 0.5rem;
+}
+
+.btnDownload:hover {
+  background: rgba(0, 0, 0, 0.8)
 }
