@@ -1,8 +1,14 @@
 import PlaylistItem from '../PlaylistItem/PlaylistItem';
 import styles from './Playlist.module.css';
 import {Spinner} from '../Spinner/Spinner';
+import { PlaylistItemType } from '@/app/globalTypes';
 
-const Playlist = ({items, loading}) => {
+type PlaylistProps = {
+    items: PlaylistItemType[],
+    loading: boolean
+}
+
+const Playlist = ({items, loading}: PlaylistProps) => {
     return (
         <div className={styles.container}>
             { loading ? 

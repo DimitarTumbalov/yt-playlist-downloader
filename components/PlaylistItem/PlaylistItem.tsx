@@ -2,8 +2,13 @@
 import Image from "next/image";
 import styles from './PlaylistItem.module.css';
 import iconDownload from '../../public/icon_download.svg'
+import { PlaylistItemType } from '@/app/globalTypes';
 
-const PlaylistItem = ({item}) => {
+type PlaylistItemProps = {
+  item: PlaylistItemType
+}
+
+const PlaylistItem = ({item}: PlaylistItemProps) => {
   return (
     <div className={styles.container}>
       <Image width={160} height={90} src={item.thumbnailUrl} alt="Thumbnail"/>
