@@ -3,6 +3,7 @@ import styles from './Playlist.module.scss';
 import {Spinner} from '../Spinner/Spinner';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import PlaylistNavigation from '../PlaylistNavigation/PlaylistNavigation';
 
 type PlaylistProps = {
     loading: boolean
@@ -11,22 +12,22 @@ type PlaylistProps = {
 const Playlist = ({loading}: PlaylistProps) => {
     const items = useSelector((state: RootState) => state.playlist);
 
+    if(loading){
+        return (
+            <div className={styles.spinnerContainer}>
+                <Spinner />
+            </div>
+        )
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.listContainer}>
-            { loading ? 
-                <Spinner /> 
-                : items?.map(item => <PlaylistItem key={item.videoId} item={item}/>)
-            }
-            </div>
-            <div className={styles.listNavigation}>
-                <select>
-                    <option>items per page</option>
-                </select>
-                <button>Prev</button>
-                <button>Next</button>
-                <p>x of y</p>
-                <button className={styles.downloadAllBtn}>Download All</button>
+                { items.length == 0 ? <div className={styles.emptyListContainer}>
+                    <h1>Try with a Playlist!</h1>
+                </div> 
+                : items.map(item => <PlaylistItem key={item.videoId} item={item}/>)
+                }
             </div>
         </div>
     )

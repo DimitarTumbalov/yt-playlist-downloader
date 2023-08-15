@@ -1,10 +1,12 @@
 'use client';
 import { configureStore } from '@reduxjs/toolkit';
 import playlistReducer from './features/playlistSlice';
+import playlistNavigationReducer from './features/playlistNavigationSlice';
 
 export const store = configureStore({
   reducer: {
-    playlist: playlistReducer
+    playlist: playlistReducer,
+    playlistNavigation: playlistNavigationReducer
   }
 })
 

@@ -1,11 +1,24 @@
-@import '../../colors';
-
+@import '../../colors.module.scss';
 .container {
   width: 100%;
-  background-color: $colorBackground;
+  background: $colorBackground;
   display: flex;
   flex-direction: row;
   margin-bottom: 0.5rem;
+  border: 1px solid $colorSecondary;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  &:hover{
+    background: $colorSecondary;
+  }
 }
 
 .innerContainer {
@@ -14,10 +27,17 @@
   padding: 0.5rem;
   align-items: flex-start;
   flex-grow: 1;
+
 }
 
 .title {
-  color: $colorText
+  color: $colorText;
+  --max-lines: 2; 
+  overflow: hidden;
+   
+  display: -webkit-box; 
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--max-lines);
 }
 
 .channel {
@@ -25,14 +45,11 @@
   margin-top: 0.5rem;
 }
 
-.select {
-  outline: none;
-  border: 0;
-  background: $colorSecondary;
-  align-self: center;
-  padding: 0.5rem;
-  width: 120px;
-  border-radius: 8px;
+.actions{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-left: 1px solid $colorSecondary;
 }
 
 .btnDownload{
@@ -43,10 +60,17 @@
   font-weight: bold;
   font-size: 16px; 
   padding: 0.5rem 1rem 0.5rem 1rem; 
-  margin-left: 0.5rem;
+  flex-grow: 1;
 
   &:hover {
     background: $colorText80
   }
 }
 
+.select {
+  outline: none;
+  border: 0;
+  align-self: center;
+  padding: 0.5rem;
+  cursor: pointer;
+}

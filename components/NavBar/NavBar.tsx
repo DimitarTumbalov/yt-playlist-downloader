@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import styles from './NavBar.module.scss';
-
-import iconDownload from '../../public/icon_download.svg'
 import SearchInput from '../SearchInput/SearchInput';
+import { IconDownload } from '../IconDownload/IconDownload';
+import colors from '../../colors.module.scss'
 
 type NavBarProps = {
   inputValue: string,
@@ -12,14 +11,16 @@ type NavBarProps = {
 
 const NavBar = ({inputValue, setInputValue, extractPlaylistId}: NavBarProps) => {
   return (
-    <nav className={styles.nav}>
-      <Image src={iconDownload} alt='logo'/>
-      <div className={styles.logo}>
-        <h1 className={styles.logoText}>YT Playlist</h1>
-        <h1 className={styles.logoText}>Downloader</h1>
-      </div>
-      <SearchInput value={inputValue} setValue={setInputValue} onClick={extractPlaylistId}/>
-    </nav>
+    <div className={styles.container}>
+      <nav className={styles.nav}>
+        <IconDownload size={48} color={colors.colorPrimary} />
+        <div className={styles.logo}>
+          <h1 className={styles.logoText}>YT Playlist</h1>
+          <h1 className={styles.logoText}>Downloader</h1>
+        </div>
+        <SearchInput value={inputValue} setValue={setInputValue} onClick={extractPlaylistId}/>
+      </nav>
+    </div>
   )
 }
 

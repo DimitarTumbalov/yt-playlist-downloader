@@ -1,5 +1,4 @@
-@import '../../colors';
-
+@import '../../colors.module.scss';
 .container {
   width: 100%;
   display: flex;
@@ -12,7 +11,7 @@
 .input {
   padding: 1rem;
   font-size: 20px;
-  background-color: $colorSecondary;
+  background-color: $colorBackground;
   flex-grow: 1;
   outline: 0;
   border-radius: 0.5rem 0 0 0.5rem;

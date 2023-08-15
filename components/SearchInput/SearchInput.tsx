@@ -14,7 +14,7 @@ const SearchInput = ({value, setValue, onClick}: SearchInputProps) => {
         className={styles.btn} 
         onClick={() => onClick()}
         disabled={value.length == 0}>
-        Extract
+        Search
       </button>
     </div>
   );
