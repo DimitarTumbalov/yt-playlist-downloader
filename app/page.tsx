@@ -2,7 +2,7 @@
 
 import { YOUTUBE_PLAYLIST_REGEX } from '../Constants';
 
-import styles from './page.module.css'
+import styles from './page.module.scss'
 import { useEffect, useState } from 'react';
 import Playlist from '../components/Playlist/Playlist';
 
