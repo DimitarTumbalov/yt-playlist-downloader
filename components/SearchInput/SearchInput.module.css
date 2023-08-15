@@ -2,16 +2,14 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 1rem;
   box-sizing: border-box;
   justify-content: stretch;
-  box-shadow: 0.1rem 0 1rem black;
-  z-index: 2147483647;
+  margin-left: 2rem;
 }
 
 .input {
-  padding: 1rem 1.5rem;
-  font-size: 24px;
+  padding: 1rem;
+  font-size: 22px;
   background-color: lightgray;
   flex-grow: 1;
   outline: 0;
@@ -20,8 +18,8 @@
 }
 
 .btn {
-  padding: 1rem 1.5rem;
-  font-size: 24px;
+  padding: 1rem;
+  font-size: 22px;
   background: rgb(106,90,205);
   color: white;
   font-weight: bold;

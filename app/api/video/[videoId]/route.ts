@@ -1,14 +1,20 @@
-const { NextResponse } = require("next/server");
+import { NextResponse } from "next/server";
 const fs = require('fs');
 const { create: createYoutubeDl } = require('youtube-dl-exec')
 const youtubedl = createYoutubeDl(`${process.cwd()}/node_modules/youtube-dl-exec/bin/yt-dlp.exe`);
 
-export const GET = async(_, { params }) => {
+type GetParams = {
+  params: {
+    videoId: string
+  }
+}
+
+export const GET = async(r: Request, { params } : GetParams) => {
   const response = await youtubedl(`https://www.youtube.com/watch?v=${params.videoId}`, {
     dumpJson: true,
-  }).then(output => {
+  }).then((output: any) => {
 
-    const audioFormats = output.formats.filter(format => format.resolution == 'audio only' && format.asr != null).map(format => ({
+    const audioFormats = output.formats.filter((format: any) => format.resolution == 'audio only' && format.asr != null).map((format: any) => ({
       url: format.url,
       ext: format.audio_ext,
       bitrate: format.asr,
@@ -19,7 +25,7 @@ export const GET = async(_, { params }) => {
     }));
 
     return audioFormats;
-  }).catch(err => console.log(err))
+  }).catch((err: Error) => console.log(err))
   
   return NextResponse.json(response);
 }

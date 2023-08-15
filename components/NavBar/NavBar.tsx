@@ -2,12 +2,23 @@ import Image from 'next/image';
 import styles from './NavBar.module.css';
 
 import iconDownload from '../../public/icon_download.svg'
+import SearchInput from '../SearchInput/SearchInput';
 
-const NavBar = () => {
+type NavBarProps = {
+  inputValue: string,
+  setInputValue: (value: string) => void,
+  extractPlaylistId: () => void
+}
+
+const NavBar = ({inputValue, setInputValue, extractPlaylistId}: NavBarProps) => {
   return (
     <nav className={styles.nav}>
       <Image className={styles.logoImg} src={iconDownload} alt='logo'/>
-      <h1 className={styles.logoText}>YouTube Playlist Downloader</h1>
+      <div className={styles.logo}>
+        <h1 className={styles.logoText}>YT Playlist</h1>
+        <h1 className={styles.logoText}>Downloader</h1>
+      </div>
+      <SearchInput value={inputValue} setValue={setInputValue} onClick={extractPlaylistId}/>
     </nav>
   )
 }

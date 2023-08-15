@@ -8,7 +8,6 @@ import Playlist from '../components/Playlist/Playlist';
 
 import { extractPlaylistItems } from '../services/YouTubeDataAPI';
 import NavBar from '../components/NavBar/NavBar';
-import SearchInput from '../components/SearchInput/SearchInput';
 import { PlaylistItemType } from './globalTypes';
 
 export default function Home() {
@@ -41,7 +40,7 @@ export default function Home() {
 		setLoading(false);
 	} 
 
-	const extractPlayListId = () => {
+	const extractPlaylistId = () => {
 		const match = YOUTUBE_PLAYLIST_REGEX.exec(inputValue)
 
 		if(match && match.length > 1){
@@ -51,8 +50,7 @@ export default function Home() {
 
 	return (
 		<main className={styles.main}>
-			<NavBar />
-			<SearchInput value={inputValue} setValue={setInputValue} onClick={extractPlayListId}/>
+			<NavBar inputValue={inputValue} setInputValue={setInputValue} extractPlaylistId={extractPlaylistId} />
 			<Playlist items={playlistItems} loading={loading}/>
 		</main>
 	)

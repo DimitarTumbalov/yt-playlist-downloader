@@ -4,7 +4,7 @@ import {Spinner} from '../Spinner/Spinner';
 import { PlaylistItemType } from '@/app/globalTypes';
 
 type PlaylistProps = {
-    items: PlaylistItemType[],
+    items: PlaylistItemType[] | null,
     loading: boolean
 }
 
