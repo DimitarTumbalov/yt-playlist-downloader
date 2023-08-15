@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './NavBar.module.css';
+import styles from './NavBar.module.scss';
 
 import iconDownload from '../../public/icon_download.svg'
 import SearchInput from '../SearchInput/SearchInput';
@@ -13,7 +13,7 @@ type NavBarProps = {
 const NavBar = ({inputValue, setInputValue, extractPlaylistId}: NavBarProps) => {
   return (
     <nav className={styles.nav}>
-      <Image className={styles.logoImg} src={iconDownload} alt='logo'/>
+      <Image src={iconDownload} alt='logo'/>
       <div className={styles.logo}>
         <h1 className={styles.logoText}>YT Playlist</h1>
         <h1 className={styles.logoText}>Downloader</h1>

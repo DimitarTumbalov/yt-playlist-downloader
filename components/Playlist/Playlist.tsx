@@ -20,10 +20,13 @@ const Playlist = ({loading}: PlaylistProps) => {
             }
             </div>
             <div className={styles.listNavigation}>
-                <p>x of y</p>
-                <select></select>
+                <select>
+                    <option>items per page</option>
+                </select>
                 <button>Prev</button>
                 <button>Next</button>
+                <p>x of y</p>
+                <button className={styles.downloadAllBtn}>Download All</button>
             </div>
         </div>
     )

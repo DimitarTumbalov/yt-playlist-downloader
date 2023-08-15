@@ -1,3 +1,5 @@
+@import '../../colors';
+
 .container {
   width: 100%;
   display: flex;
@@ -9,30 +11,30 @@
 
 .input {
   padding: 1rem;
-  font-size: 22px;
-  background-color: lightgray;
+  font-size: 20px;
+  background-color: $colorSecondary;
   flex-grow: 1;
   outline: 0;
   border-radius: 0.5rem 0 0 0.5rem;
-  border: 0.1rem solid darkgray;
+  border: 0;
 }
 
 .btn {
   padding: 1rem;
-  font-size: 22px;
-  background: rgb(106,90,205);
+  font-size: 20px;
+  background: $colorPrimary;
   color: white;
   font-weight: bold;
   cursor: pointer;
   border: 0;
   border-radius: 0 0.5rem 0.5rem 0;
-}
 
-.btn:hover {
-  background: rgba(106,90,205, 0.8);
-}
+  &:hover {
+    background: $colorPrimary80;
+  }
 
-.btn:disabled {
-  pointer-events: none;
-  background: rgba(106,90,205, 0.4);
+  &:disabled {
+    pointer-events: none;
+    background: $colorPrimary40;
+  }
 }
